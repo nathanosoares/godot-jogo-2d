@@ -1,17 +1,17 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Player/char_front_walk.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Player/char_front_idle.png" type="Texture" id=3]
 [ext_resource path="res://Player/char_back_idle.png" type="Texture" id=4]
 [ext_resource path="res://Player/char_back_walk.png" type="Texture" id=5]
-[ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Weapons/PlayerSword.tscn" type="PackedScene" id=6]
 
-[sub_resource type="CapsuleShape2D" id=15]
+[sub_resource type="CapsuleShape2D" id=33]
 radius = 4.0
 height = 4.0
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=34]
 resource_name = "IdleBackLeft"
 length = 0.3
 loop = true
@@ -53,7 +53,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=35]
 resource_name = "IdleBackRight"
 length = 0.3
 loop = true
@@ -95,7 +95,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=36]
 resource_name = "IdleFrontLeft"
 length = 0.3
 loop = true
@@ -137,7 +137,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=37]
 resource_name = "IdleFrontRight"
 length = 0.3
 loop = true
@@ -179,7 +179,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=38]
 resource_name = "RunBackLeft"
 length = 0.2
 loop = true
@@ -220,7 +220,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=39]
 resource_name = "RunBackRight"
 length = 0.2
 loop = true
@@ -261,7 +261,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=40]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -301,7 +301,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=41]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -401,106 +401,8 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=32]
 
-[sub_resource type="Animation" id=33]
-length = 0.2
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 180.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("PivotBase:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 180.0, 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("PivotBase/Weapon:flipped")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=34]
-length = 0.2
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 180.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("PivotBase:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 180.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("PivotBase/Weapon:flipped")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-
-[sub_resource type="AnimationNodeAnimation" id=35]
-animation = "HitAnimationLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=36]
-animation = "HitAnimationRight"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id=37]
-blend_point_0/node = SubResource( 35 )
-blend_point_0/pos = -1.0
-blend_point_1/node = SubResource( 36 )
-blend_point_1/pos = 1.0
-
-[sub_resource type="AnimationNodeStateMachine" id=38]
-states/Hit/node = SubResource( 37 )
-states/Hit/position = Vector2( -629.164, 66 )
-graph_offset = Vector2( -1012.16, 0 )
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id=39]
-
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -508,51 +410,29 @@ position = Vector2( 0, -5 )
 texture = ExtResource( 3 )
 flip_h = true
 hframes = 2
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1 )
 rotation = -1.5708
-shape = SubResource( 15 )
+shape = SubResource( 33 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/IdleBackLeft = SubResource( 16 )
-anims/IdleBackRight = SubResource( 17 )
-anims/IdleFrontLeft = SubResource( 18 )
-anims/IdleFrontRight = SubResource( 19 )
-anims/RunBackLeft = SubResource( 20 )
-anims/RunBackRight = SubResource( 21 )
-anims/RunFrontLeft = SubResource( 22 )
-anims/RunFrontRight = SubResource( 23 )
+anims/IdleBackLeft = SubResource( 34 )
+anims/IdleBackRight = SubResource( 35 )
+anims/IdleFrontLeft = SubResource( 36 )
+anims/IdleFrontRight = SubResource( 37 )
+anims/RunBackLeft = SubResource( 38 )
+anims/RunBackRight = SubResource( 39 )
+anims/RunFrontLeft = SubResource( 40 )
+anims/RunFrontRight = SubResource( 41 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 31 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 32 )
-parameters/Idle/blend_position = Vector2( 0.37148, 0.637931 )
+parameters/Idle/blend_position = Vector2( 0.243089, 0.534483 )
 parameters/Run/blend_position = Vector2( 0, 0 )
 
-[node name="Weapon" type="Node2D" parent="."]
-position = Vector2( 0, -4 )
-
-[node name="Pivot" type="Node2D" parent="Weapon"]
-rotation = 3.14159
-
-[node name="AnimationHit" type="AnimationPlayer" parent="Weapon/Pivot"]
-anims/HitAnimationLeft = SubResource( 33 )
-anims/HitAnimationRight = SubResource( 34 )
-
-[node name="AnimationTree" type="AnimationTree" parent="Weapon/Pivot"]
-tree_root = SubResource( 38 )
-anim_player = NodePath("../AnimationHit")
-active = true
-parameters/playback = SubResource( 39 )
-parameters/Hit/blend_position = 1.0
-
-[node name="PivotBase" type="Node2D" parent="Weapon/Pivot"]
-position = Vector2( 11, 0 )
-rotation = 3.14159
-
-[node name="Weapon" parent="Weapon/Pivot/PivotBase" instance=ExtResource( 6 )]
-position = Vector2( 0, -5 )
-flipped = true
+[node name="Sword" parent="." instance=ExtResource( 6 )]

@@ -6,14 +6,14 @@ const FRICTION = 25
 
 var velocity = Vector2.ZERO
 
+var hit = false
+
 # Player
-onready var animationPlayer = $AnimationPlayer
 onready var animationPlayerTree = $AnimationTree
 onready var animationPlayerState = animationPlayerTree.get("parameters/playback")
 
 # Weapon
-onready var animationHitTree = get_node("Weapon/Pivot/AnimationTree")
-onready var animationHitState = animationHitTree.get("parameters/playback")
+onready var hitAnimation = get_node("Sword/Pivot/AnimationHit")
 
 func _physics_process(_delta):
 	var input_strength = Vector2.ZERO;
@@ -26,7 +26,7 @@ func _physics_process(_delta):
 		velocity = velocity.move_toward(input_strength * MAX_SPEED, ACCELERATION)
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
-
+	
 	velocity = move_and_slide(velocity)
 	
 	var diff = get_viewport().get_mouse_position() - position
@@ -38,15 +38,13 @@ func _physics_process(_delta):
 		animationPlayerState.travel("Idle")
 	else:
 		animationPlayerState.travel("Run")
-		
-	get_node("Weapon").rotation = -atan2(diff.x, diff.y)
 
-func _input(event):
-	
-	if event is InputEventMouseButton and event.pressed:
-		var hitAnimation = get_node("Weapon/Pivot/AnimationHit")
-		
-		if !hitAnimation.is_playing():
-			var k = "parameters/Hit/blend_position"
-			animationHitTree.set(k, -animationHitTree.get(k))
-			animationHitState.start("Hit")
+	get_node("Sword").rotation = -atan2(diff.x, diff.y)
+
+func _process(_delta):
+	if Input.is_action_just_pressed("attack"):
+		hit = !hit
+		if hit:
+			hitAnimation.play("HitAnimation")
+		else:
+			hitAnimation.play_backwards("HitAnimation")

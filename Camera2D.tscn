@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Camera2D.gd" type="Script" id=2]
+[ext_resource path="res://Camera2DShakeEffect.gd" type="Script" id=3]
+
+[node name="Camera2D" type="Camera2D"]
+position = Vector2( 160, 90 )
+current = true
+script = ExtResource( 2 )
+
+[node name="Limits" type="Node" parent="."]
+
+[node name="TopLeft" type="Position2D" parent="Limits"]
+position = Vector2( -24, -24 )
+
+[node name="BottomRight" type="Position2D" parent="Limits"]
+position = Vector2( 344, 208 )
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="Shake" type="Node" parent="Effects"]
+script = ExtResource( 3 )
+
+[node name="Frequency" type="Timer" parent="Effects/Shake"]
+
+[node name="Duration" type="Timer" parent="Effects/Shake"]
+
+[node name="ShakeTween" type="Tween" parent="Effects/Shake"]
+[connection signal="timeout" from="Effects/Shake/Frequency" to="Effects/Shake" method="_on_Frequency_timeout"]
+[connection signal="timeout" from="Effects/Shake/Duration" to="Effects/Shake" method="_on_Duration_timeout"]
